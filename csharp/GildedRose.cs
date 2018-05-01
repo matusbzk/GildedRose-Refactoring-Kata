@@ -13,6 +13,12 @@ namespace csharp
 
         public Item UpdateQuality(Item item)
         {
+            if (item.Name.ToLower().Contains("sulfuras"))
+            {
+                item.SellIn--;
+                return item;
+            }
+
             if (item.Name != "Aged Brie" && item.Name != "Backstage passes to a TAFKAL80ETC concert")
             {
                 if (item.Quality > 0)
