@@ -30,6 +30,12 @@ namespace csharp
 
             if (item.Name.ToLower().Contains("backstage passes"))
             {
+                if (item.SellIn <= 0)
+                {
+                    item.Quality = 0;
+                    return item;
+                }
+
                 if (item.SellIn < 11)
                 {
                     qualityDifference += 1;
@@ -59,7 +65,7 @@ namespace csharp
                     }
                     else
                     {
-                        item.Quality = item.Quality - item.Quality;
+                        item.Quality = 0;
                     }
                 }
                 else
