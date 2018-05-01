@@ -9,7 +9,19 @@ namespace csharp
         {
             Console.WriteLine("OMGHAI!");
 
-            IList<Item> Items = new List<Item>{
+            IList<Item> items = CreateItems();
+
+            Do31Days(items);
+
+            Console.ReadKey();
+        }
+
+        // private methods
+
+        #region CreateItems()
+        private static IList<Item> CreateItems()
+        {
+            return new List<Item>{
                 new Item {Name = "+5 Dexterity Vest", SellIn = 10, Quality = 20},
                 new Item {Name = "Aged Brie", SellIn = 2, Quality = 0},
                 new Item {Name = "Elixir of the Mongoose", SellIn = 5, Quality = 7},
@@ -33,26 +45,29 @@ namespace csharp
                     SellIn = 5,
                     Quality = 49
                 },
-				// this conjured item does not work properly yet
-				new Item {Name = "Conjured Mana Cake", SellIn = 3, Quality = 6}
+                new Item {Name = "Conjured Mana Cake", SellIn = 3, Quality = 6}
             };
+        }
+        #endregion
 
-            var app = new GildedRose(Items);
-
+        #region Do31Days(IList<Item> items)
+        private static void Do31Days(IList<Item> items)
+        {
+            var app = new GildedRose(items);
 
             for (var i = 0; i < 31; i++)
             {
                 Console.WriteLine("-------- day " + i + " --------");
                 Console.WriteLine("name, sellIn, quality");
-                for (var j = 0; j < Items.Count; j++)
+                for (var j = 0; j < items.Count; j++)
                 {
-                    System.Console.WriteLine(Items[j].Name + ", " + Items[j].SellIn + ", " + Items[j].Quality);
+                    System.Console.WriteLine(items[j].Name + ", " + items[j].SellIn + ", " + items[j].Quality);
                 }
                 Console.WriteLine("");
                 app.UpdateQuality();
             }
-
-            Console.ReadKey();
         }
+        #endregion
+
     }
 }
