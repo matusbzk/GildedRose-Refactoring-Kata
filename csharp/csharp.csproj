@@ -67,7 +67,9 @@
     <Compile Include="Item.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QualityUpdaters\BasicQualityUpdater.cs" />
+    <Compile Include="QualityUpdaters\AgedBrieQualityUpdater.cs" />
+    <Compile Include="QualityUpdaters\BackstagePassesQualityUpdater.cs" />
+    <Compile Include="QualityUpdaters\QualityUpdater.cs" />
     <Compile Include="QualityUpdaters\SulfurasQualityUpdater.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,7 @@
 ﻿
 namespace csharp.QualityUpdaters
 {
-    public class BasicQualityUpdater
+    public class QualityUpdater
     {
         // parameters
         #region SellInDecrease
@@ -10,6 +10,13 @@ namespace csharp.QualityUpdaters
 
         #region QualityDifference
         protected virtual int QualityDifference => 1;
+        #endregion
+
+        #region QualityDifferenceMultiplier
+        /**
+         * Once the sell by date has passed, Quality degrades twice as fast
+         */
+        protected virtual int QualityDifferenceMultiplier { get; set; } = 1;
         #endregion
 
         #region QualityDecreaseMultiplier
@@ -26,14 +33,15 @@ namespace csharp.QualityUpdaters
         #endregion
 
         #region MaxQuality
-        protected virtual int MaxQuality => 50;
+        protected virtual int MaxQuality { get; set; } = 50;
         #endregion
 
         // public methods
         public Item UpdateQuality(Item item)
         {
             item.SellIn -= SellInDecrease;
-            item.Quality += QualityDifference * QualityDecreaseMultiplier * (item.SellIn > 0 ? 1 : 2);
+            this.QualityDifferenceMultiplier *= item.SellIn > 0 ? 1 : 2;
+            item.Quality += QualityDifference * QualityDecreaseMultiplier * QualityDifferenceMultiplier;
             item.Quality = item.Quality > MaxQuality
                 ? MaxQuality
                 : item.Quality < MinQuality

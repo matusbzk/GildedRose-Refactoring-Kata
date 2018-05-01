@@ -35,14 +35,22 @@ namespace csharp
          */
         private Item UpdateQuality(Item item)
         {
-            BasicQualityUpdater qualityUpdater = null;
+            QualityUpdater qualityUpdater = null;
 
             if (item.Name.ToLower().Contains("sulfuras"))
             {
                 qualityUpdater = new SulfurasQualityUpdater();
             }
+            if (item.Name.ToLower().Contains("aged brie"))
+            {
+                qualityUpdater = qualityUpdater ?? new AgedBrieQualityUpdater();
+            }
+            if (item.Name.ToLower().Contains("backstage passes"))
+            {
+                qualityUpdater = qualityUpdater ?? new BackstagePassesQualityUpdater(item);
+            }
 
-            qualityUpdater = qualityUpdater ?? new BasicQualityUpdater();
+            qualityUpdater = qualityUpdater ?? new QualityUpdater();
             return qualityUpdater.UpdateQuality(item);
         }
         #endregion

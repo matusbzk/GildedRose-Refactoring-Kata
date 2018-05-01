@@ -1,7 +1,7 @@
 ﻿
 namespace csharp.QualityUpdaters
 {
-    public class SulfurasQualityUpdater : BasicQualityUpdater
+    public class SulfurasQualityUpdater : QualityUpdater
     {
         // parameters
         #region SellInDecrease
