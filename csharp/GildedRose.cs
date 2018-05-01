@@ -15,7 +15,6 @@ namespace csharp
         {
             if (item.Name.ToLower().Contains("sulfuras"))
             {
-                item.SellIn--;
                 return item;
             }
 
