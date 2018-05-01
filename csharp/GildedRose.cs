@@ -47,7 +47,7 @@ namespace csharp
             }
             if (item.Name.ToLower().Contains("backstage passes"))
             {
-                qualityUpdater = qualityUpdater ?? new BackstagePassesQualityUpdater(item);
+                qualityUpdater = qualityUpdater ?? new BackstagePassesQualityUpdater();
             }
 
             qualityUpdater = qualityUpdater ?? new QualityUpdater();

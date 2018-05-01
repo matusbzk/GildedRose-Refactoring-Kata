@@ -33,86 +33,35 @@ namespace csharp.QualityUpdaters
         #endregion
 
         #region MaxQuality
-        protected virtual int MaxQuality { get; set; } = 50;
+        protected virtual int MaxQuality => 50;
         #endregion
 
         // public methods
-        public Item UpdateQuality(Item item)
+        public virtual Item UpdateQuality(Item item)
         {
             item.SellIn -= SellInDecrease;
             this.QualityDifferenceMultiplier *= item.SellIn > 0 ? 1 : 2;
             item.Quality += QualityDifference * QualityDecreaseMultiplier * QualityDifferenceMultiplier;
-            item.Quality = item.Quality > MaxQuality
-                ? MaxQuality
-                : item.Quality < MinQuality
-                    ? MinQuality
-                    : item.Quality;
-                    
-
-            //if (item.Name.ToLower().Contains("sulfuras"))
-            //{
-            //    return item;
-            //}
-
-            //item.SellIn -= sellInDecrease;
-
-            //qualityDifference = item.Quality > 0 && item.Quality < 50 ? -1 : 0;
-
-            //if (item.Name.ToLower().Contains("aged brie") || item.Name.ToLower().Contains("backstage passes"))
-            //{
-            //    qualityDifference *= -1;
-            //}
-
-            //if (item.Name.ToLower().Contains("backstage passes"))
-            //{
-            //    if (item.SellIn <= 0)
-            //    {
-            //        item.Quality = 0;
-            //        return item;
-            //    }
-
-            //    if (item.SellIn < 11)
-            //    {
-            //        qualityDifference += 1;
-            //    }
-
-            //    if (item.SellIn < 6)
-            //    {
-            //        qualityDifference += 1;
-            //    }
-            //}
-
-            //item.Quality += qualityDifference;
-
-            //if (item.SellIn < 0)
-            //{
-            //    if (item.Name != "Aged Brie")
-            //    {
-            //        if (!item.Name.ToLower().Contains("backstagepasses"))
-            //        {
-            //            if (item.Quality > 0)
-            //            {
-            //                if (item.Name != "Sulfuras, Hand of Ragnaros")
-            //                {
-            //                    item.Quality = item.Quality - 1;
-            //                }
-            //            }
-            //        }
-            //        else
-            //        {
-            //            item.Quality = 0;
-            //        }
-            //    }
-            //    else
-            //    {
-            //        if (item.Quality < 50)
-            //        {
-            //            item.Quality = item.Quality + 1;
-            //        }
-            //    }
-            //}
+            item.Quality = this.CheckMinMax(item.Quality);
 
             return item;
         }
+
+        // protected methods
+
+        #region CheckMinMax(int quality)
+        /**
+         * Checks whether quality is in given range and modifies it if it's not
+         */
+        protected int CheckMinMax(int quality)
+        {
+            return quality > MaxQuality
+                ? MaxQuality
+                : quality < MinQuality
+                    ? MinQuality
+                    : quality;
+        }
+        #endregion
+
     }
 }
