@@ -16,7 +16,6 @@ namespace csharp.QualityUpdaters
         // public methods
         public override Item UpdateQuality(Item item)
         {
-            item.SellIn -= SellInDecrease;
             this.QualityDifferenceMultiplier *= item.SellIn > 10
                 ? 1
                 : item.SellIn > 5
@@ -24,12 +23,13 @@ namespace csharp.QualityUpdaters
                     : item.SellIn > 0
                         ? 3
                         : 0;
-            item.Quality += QualityDifference * QualityDecreaseMultiplier * QualityDifferenceMultiplier;
+
+            base.UpdateQuality(item);
+
             if (item.SellIn <= 0)
             {
                 item.Quality = 0;
             }
-            item.Quality = this.CheckMinMax(item.Quality);
 
             return item;
         }

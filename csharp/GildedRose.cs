@@ -9,6 +9,10 @@ namespace csharp
         // parameters
         IList<Item> Items;
 
+        private static string sulfurasSubstring = "sulfuras";
+        private static string agedBrieSubstring = "aged brie";
+        private static string backstagePassesSubstring = "backstage passes";
+
         // constructors
         #region GildedRose(IList<Item> Items)
         public GildedRose(IList<Item> Items)
@@ -37,15 +41,15 @@ namespace csharp
         {
             QualityUpdater qualityUpdater = null;
 
-            if (item.Name.ToLower().Contains("sulfuras"))
+            if (item.Name.ToLower().Contains(GildedRose.sulfurasSubstring))
             {
                 qualityUpdater = new SulfurasQualityUpdater();
             }
-            if (item.Name.ToLower().Contains("aged brie"))
+            if (item.Name.ToLower().Contains(GildedRose.agedBrieSubstring))
             {
                 qualityUpdater = qualityUpdater ?? new AgedBrieQualityUpdater();
             }
-            if (item.Name.ToLower().Contains("backstage passes"))
+            if (item.Name.ToLower().Contains(GildedRose.backstagePassesSubstring))
             {
                 qualityUpdater = qualityUpdater ?? new BackstagePassesQualityUpdater();
             }
