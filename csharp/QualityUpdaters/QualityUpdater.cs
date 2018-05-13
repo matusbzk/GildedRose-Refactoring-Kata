@@ -40,7 +40,7 @@ namespace csharp.QualityUpdaters
         public virtual Item UpdateQuality(Item item)
         {
             item.SellIn -= SellInDecrease;
-            this.QualityDifferenceMultiplier *= item.SellIn > 0 ? 1 : 2;
+            this.QualityDifferenceMultiplier *= item.SellIn >= 0 ? 1 : 2;
             this.QualityDifferenceMultiplier *= item.Name.ToLower().Contains("conjured") ? 2 : 1;
             item.Quality += QualityDifference * QualityDecreaseMultiplier * QualityDifferenceMultiplier;
             item.Quality = this.CheckMinMax(item.Quality);

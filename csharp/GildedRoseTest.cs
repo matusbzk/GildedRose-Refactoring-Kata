@@ -37,6 +37,16 @@ namespace csharp
         }
 
         [Test]
+        public void QualityDegradationGoingToZeroTest()
+        {
+            IList<Item> items = new List<Item> { new Item { Name = "Frozen Pizza: Hawai", SellIn = 1, Quality = 15 } };
+            GildedRose app = new GildedRose(items);
+            app.UpdateQuality();
+            Assert.AreEqual(14, items[0].Quality);
+            Assert.AreEqual(0, items[0].SellIn);
+        }
+
+        [Test]
         public void QualityGoingBelowZeroBeforeSellInTest()
         {
             IList<Item> items = new List<Item> { new Item { Name = "Frozen Pizza: Quattro Stagioni", SellIn = 42, Quality = 0 } };
@@ -177,6 +187,16 @@ namespace csharp
         }
 
         [Test]
+        public void BackstagePassesAtSellInTest()
+        {
+            IList<Item> items = new List<Item> { new Item { Name = "Backstage passes to Helena Vondrackova concert", SellIn = 1, Quality = 2 } };
+            GildedRose app = new GildedRose(items);
+            app.UpdateQuality();
+            Assert.AreEqual(5, items[0].Quality);
+            Assert.AreEqual(0, items[0].SellIn);
+        }
+
+        [Test]
         public void BackstagePassesAtZeroTest()
         {
             IList<Item> items = new List<Item> { new Item { Name = "Backstage passes to Evanescence concert", SellIn = 0, Quality = 12 } };
@@ -195,9 +215,6 @@ namespace csharp
             Assert.AreEqual(0, items[0].Quality);
             Assert.AreEqual(-6, items[0].SellIn);
         }
-
-        /////////////////////////////////////////
-
 
         [Test]
         public void ConjuredQualityDegradationBeforeSellInTest()

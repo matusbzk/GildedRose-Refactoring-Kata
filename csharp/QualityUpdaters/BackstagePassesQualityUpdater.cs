@@ -20,13 +20,13 @@ namespace csharp.QualityUpdaters
                 ? 1
                 : item.SellIn > 5
                     ? 2
-                    : item.SellIn > 0
+                    : item.SellIn >= 0
                         ? 3
                         : 0;
 
             base.UpdateQuality(item);
 
-            if (item.SellIn <= 0)
+            if (item.SellIn < 0)
             {
                 item.Quality = 0;
             }
